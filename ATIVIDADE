@@ -1,0 +1,73 @@
+ATIVIDADE 1:
+
+import pandas as pd
+import random
+
+def gerar_dados():
+    nomes = [
+        "João", "Maria", "Ana", "Carlos", "Paulo", "Fernanda", "Luiz", 
+        "Clara", "Pedro", "Isabela", "José", "Renata", "Lucas", "Camila",
+        "André", "Bianca", "Roberto", "Sofia", "Marcos", "Larissa"
+    ]
+    
+    dados = {
+        "Nome": [random.choice(nomes) for _ in range(100)],
+        "Nota": [round(random.uniform(5.0, 10.0), 2) for _ in range(100)]
+    }
+    return pd.DataFrame(dados)
+
+def analisar_dados(dados):
+    # Exibindo os 12 primeiros registros
+    print("=== 12 Primeiros Registros ===")
+    print(dados.head(12))
+    
+    print("\n=== 6 Últimos Registros ===")
+    print(dados.tail(6))
+    
+    print("\n=== Tamanho da Massa de Dados ===")
+    print(f"Total de registros: {dados.shape[0]}")
+    print(f"Total de colunas: {dados.shape[1]}")
+
+if __name__ == "__main__":
+    dados = gerar_dados()
+    analisar_dados(dados)
+
+ATIVIDADE 2:
+
+import pandas as pd
+
+def criar_dados():
+    # Criando a massa de dados
+    dados = {
+        "ID": [1, 2, 3, 32, 45, 56, 78, 90],
+        "Nome": [
+            "Filme A", "Filme B", "Filme C", 
+            "Filme Interessante", "Outro Filme", 
+            "Filme X", "Filme Y", "Filme Z"
+        ],
+        "Nota": [4.5, 2.0, 3.0, 3.8, 2.9, 4.7, 3.2, 1.8]
+    }
+    return pd.DataFrame(dados)
+
+def analisar_filme_por_id(dados, id_filme):
+    # Localizando o filme com ID especificado
+    filme = dados[dados['ID'] == id_filme]
+    
+    if filme.empty:
+        print(f"Nenhum filme encontrado com ID={id_filme}.")
+    else:
+        nome = filme.iloc[0]['Nome']
+        nota = filme.iloc[0]['Nota']
+        
+        if nota > 3:
+            print(f"O filme '{nome}' tem uma nota de {nota:.2f} e é considerado bom.")
+        else:
+            print(f"O filme '{nome}' tem uma nota de {nota:.2f} e não é considerado bom.")
+
+if __name__ == "__main__":
+    dados = criar_dados()
+    
+    id_filme = 32
+    
+    # Analisando o filme
+    analisar_filme_por_id(dados, id_filme)
